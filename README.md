@@ -33,9 +33,9 @@ Di chuyển vào thư mục backend:
 
 📌 Frontend (React)
 
-Di chuyển vào thư mục frontend "src"
+Di chuyển vào thư mục frontend "src" (tạo terminal mới)
 
-    **cd frontend** (cd ../frontend Nếu đang ở folder server)
+    **cd src** 
     **npm install**
 
 
@@ -45,7 +45,7 @@ Mở 2 terminal:
 
 Terminal 1:
 
-    **cd backend**
+    **cd server**
 
     **node index.js**
 Terminal 2:
