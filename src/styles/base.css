@@ -1,0 +1,18 @@
+body {
+  font-family: var(--font-base);
+  background: linear-gradient(135deg, #eef2ff, #fdf4ff);
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}

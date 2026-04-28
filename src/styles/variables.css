@@ -1,0 +1,39 @@
+:root {
+  --font-base: 'Inter', system-ui, sans-serif;
+
+  /* ===== BACKGROUND ===== */
+  --bg-primary: #f8fafc;       /* trắng xanh nhẹ */
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.7);
+
+  /* ===== TEXT ===== */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* ===== ACCENT ===== */
+  --accent-primary: #6366f1;   /* tím sáng */
+  --accent-light: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.2);
+
+  /* ===== BORDER ===== */
+  --border-primary: rgba(0,0,0,0.08);
+  --border-subtle: rgba(0,0,0,0.05);
+
+  /* ===== STATUS ===== */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* ===== BUTTON ===== */
+  --btn-primary-bg: linear-gradient(to right, #6366f1, #a855f7);
+  --btn-primary-hover: linear-gradient(to right, #4f46e5, #9333ea);
+
+  /* ===== EFFECT ===== */
+  --glass-bg: rgba(255,255,255,0.6);
+  --glass-blur: blur(12px);
+
+  /* ===== RADIUS ===== */
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}

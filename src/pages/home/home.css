@@ -1,0 +1,10 @@
+.home {
+    display: flex;
+    font-family: var(--sans-font);
+    color: var(--text-primary);
+}
+
+.home__title {}
+.home__headingTitle {
+
+}

@@ -1,0 +1,58 @@
+.room-detail {
+  padding: 24px;
+  font-family: var(--sans-font);
+  color: var(--text-secondary);
+}
+
+/* ===== Header ===== */
+.room-detail__header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 0.4px solid rgba(0, 0, 0, 0.4);
+}
+
+.room-detail__header h2 {
+  font-size: 24px;
+  color: var(--accent-light);
+  margin-bottom: 4px;
+}
+
+.room-detail__header p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===== Tabs ===== */
+.room-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.room-tab {
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.room-tab:hover {
+  background: var(--bg-gray);
+  color: var(--text-primary);
+}
+
+.room-tab.active {
+  background: var(--accent-light);
+  color: #fff;
+}
+
+/* ===== Content ===== */
+.room-content {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 300px;
+}

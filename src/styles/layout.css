@@ -1,0 +1,21 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #fdf4ff);
+}
+
+/* Content */
+.layout__content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* Card global style */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
