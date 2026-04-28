@@ -1,53 +1,65 @@
-📌 Hướng dẫn chạy dự án
-1. Khởi động MySQL
+# 📌 Hướng dẫn chạy dự án Roommate
 
-Trước tiên, hãy đảm bảo MySQL đang chạy:
+Dưới đây là các bước chi tiết để cài đặt và chạy dự án này trên môi trường local.
 
-Mở XAMPP /MySQL Workbench
+## 1. Khởi động Cơ sở dữ liệu (MySQL)
 
-Start dịch vụ MySQL
+Trước tiên, hãy đảm bảo MySQL đang hoạt động:
 
-- Chạy/execute roomate.sql trong sql workbench 
-- Tải Xamp start mySQL
+1. Mở **XAMPP** hoặc **MySQL Workbench**.
+2. Start dịch vụ **MySQL** (nếu dùng XAMPP).
+3. Import database:
+   - Mở công cụ quản lý MySQL (như phpMyAdmin hoặc MySQL Workbench).
+   - Chạy/execute file `roommate.sql` (nằm ở thư mục gốc của dự án) để tạo cơ sở dữ liệu và các bảng cần thiết.
 
+## 2. Cấu hình Database cho Backend
 
-2. Cấu hình database
+Kiểm tra và cấu hình file `.env` trong thư mục `backend`. Nếu chưa có, hãy tạo file `backend/.env` với nội dung sau (thay đổi thông tin nếu cấu hình MySQL của bạn khác):
 
-Kiểm tra file cấu hình kết nối database .env
-
+```env
 DB_HOST=localhost
-
 DB_USER=root
-
 DB_PASSWORD=
-
 DB_NAME=roommate
+```
 
-3. Cài dependencies
-📌 Backend 
+## 3. Cài đặt Dependencies
 
-Di chuyển vào thư mục backend:
+Mở terminal và cài đặt các thư viện cần thiết cho cả backend và frontend.
 
-    **cd server**
-    **npm install**
+### 📌 Cài đặt Backend
+Mở terminal mới và chạy các lệnh sau:
+```bash
+cd backend
+npm install
+```
 
-📌 Frontend (React)
+### 📌 Cài đặt Frontend
+Mở một terminal khác và chạy các lệnh sau:
+```bash
+cd frontend
+npm install
+```
 
-Di chuyển vào thư mục frontend "src" (tạo terminal mới)
+## 4. Chạy dự án (Run Application)
 
-    **cd src** 
-    **npm install**
+Để ứng dụng hoạt động đầy đủ, bạn cần chạy song song cả Backend và Frontend.
 
+### Khởi động Backend
+Tại terminal của thư mục `backend`, chạy lệnh:
+```bash
+node src/index.js
+```
+*(Nếu thành công, terminal sẽ báo kết nối database thành công và server chạy ở port 8800 hoặc port đã cấu hình).*
 
-6. Chạy full project (chính)
+### Khởi động Frontend
+Tại terminal của thư mục `frontend`, chạy lệnh:
+```bash
+npm run dev
+```
+*(Sau đó, mở đường dẫn `http://localhost:5173/` được hiển thị trên terminal bằng trình duyệt để sử dụng ứng dụng).*
 
-Mở 2 terminal:
-
-Terminal 1:
-
-    **cd server**
-
-    **node index.js**
-Terminal 2:
-
-    **npm run dev**
+---
+**💡 Lưu ý:** 
+- Đảm bảo bạn đã cài đặt **Node.js** trên máy tính.
+- Nếu gặp lỗi port đã được sử dụng, hãy tắt các ứng dụng đang dùng port đó hoặc đổi port trong source code.
