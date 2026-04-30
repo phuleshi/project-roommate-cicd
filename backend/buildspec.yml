@@ -1,3 +1,10 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: ap-northeast-1
+    REPOSITORY_URI: 499989195746.dkr.ecr.ap-northeast-1.amazonaws.com/roommate-backend
+
 phases:
   pre_build:
     commands:
