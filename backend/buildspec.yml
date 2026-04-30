@@ -9,12 +9,12 @@ phases:
   pre_build:
     commands:
       - echo Logging in to ECR...
-      - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URI
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
 
   build:
     commands:
       - echo Build Docker image...
-      - cd backend 
+      - cd backend
       - docker build -t roommate-backend .
       - docker tag roommate-backend:latest $REPOSITORY_URI:latest
 
@@ -22,5 +22,10 @@ phases:
     commands:
       - echo Push Docker image...
       - docker push $REPOSITORY_URI:latest
-      - echo Writing image definitions...
+
+      - echo Writing imagedefinitions.json...
       - printf '[{"name":"roommate-container","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
