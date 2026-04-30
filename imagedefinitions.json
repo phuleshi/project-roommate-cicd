@@ -1,0 +1,6 @@
+[
+  {
+    "name": "roommate-container",
+    "imageUri": "499989195746.dkr.ecr.ap-northeast-1.amazonaws.com/roommate-backend:latest"
+  }
+]
