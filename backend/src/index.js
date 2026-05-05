@@ -22,12 +22,13 @@ const app = express();
 const port = Number(process.env.PORT || 5000);
 const clientOrigin = process.env.CLIENT_URL || 'http://localhost:5173';
 
-app.use(
-  cors({
-    origin: clientOrigin,
-    credentials: true,
-  }),
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://roommate-frontend.s3-website-ap-northeast-1.amazonaws.com"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
