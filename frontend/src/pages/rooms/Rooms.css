@@ -6,6 +6,18 @@
   color: var(--text-secondary);
 }
 
+.rooms-loading, .rooms-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  font-size: 16px;
+}
+
+.rooms-error {
+  color: #ef4444;
+}
+
 /* ===== Header ===== */
 .rooms-header {
   display: flex;

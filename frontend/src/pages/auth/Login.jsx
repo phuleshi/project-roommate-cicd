@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, LogIn, AlertCircle } from "lucide-react";
 import { loginApi } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Auth.css";
 
 export default function Login() {
@@ -12,20 +13,20 @@ export default function Login() {
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { t } = useLanguage();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
     if (error) setError(null);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
 
     try {
       const data = await loginApi(formData);
-
-      login(data); // 🔥 lưu vào context
+      login(data);
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -38,10 +39,8 @@ export default function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1 className="auth-title">Welcome Back</h1>
-          <p className="auth-subtitle">
-            Đăng nhập để tiếp tục quản lý phòng trọ
-          </p>
+          <h1 className="auth-title">{t("auth.welcomeBack")}</h1>
+          <p className="auth-subtitle">{t("auth.loginSubtitle")}</p>
         </div>
 
         {error && (
@@ -53,7 +52,7 @@ export default function Login() {
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>{t("common.email")}</label>
             <div className="input-wrapper">
               <Mail className="input-icon" />
               <input
@@ -62,13 +61,14 @@ export default function Login() {
                 className="form-input"
                 value={formData.email}
                 onChange={handleChange}
+                placeholder={t("auth.emailPlaceholder")}
                 required
               />
             </div>
           </div>
 
           <div className="form-group">
-            <label>Mật khẩu</label>
+            <label>{t("common.password")}</label>
             <div className="input-wrapper">
               <Lock className="input-icon" />
               <input
@@ -77,18 +77,24 @@ export default function Login() {
                 className="form-input"
                 value={formData.password}
                 onChange={handleChange}
+                placeholder={t("auth.passwordPlaceholder")}
                 required
               />
             </div>
           </div>
 
           <button className="auth-btn" disabled={loading}>
-            {loading ? "Loading..." : <><LogIn size={18}/> Đăng nhập</>}
+            {loading ? t("common.loading") : (
+              <>
+                <LogIn size={18} />
+                {t("auth.loginButton")}
+              </>
+            )}
           </button>
         </form>
 
         <div className="auth-footer">
-          Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
+          {t("auth.noAccount")} <Link to="/register">{t("auth.register")}</Link>
         </div>
       </div>
     </div>

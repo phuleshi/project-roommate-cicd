@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import db from "../db.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -84,6 +85,103 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/me", authenticateToken, async (req, res) => {
+  try {
+    const [users] = await db.execute(
+      "SELECT id, email, full_name, created_at FROM users WHERE id = ?",
+      [req.user.id]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ user: users[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.put("/me", authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { full_name, email, current_password, new_password } = req.body;
+
+    if (!full_name || !email) {
+      return res.status(400).json({ message: "Full name and email are required" });
+    }
+
+    const [users] = await db.execute(
+      "SELECT id, email, full_name, password, created_at FROM users WHERE id = ?",
+      [userId]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const currentUser = users[0];
+
+    if (email !== currentUser.email) {
+      const [existingUsers] = await db.execute(
+        "SELECT id FROM users WHERE email = ? AND id != ?",
+        [email, userId]
+      );
+
+      if (existingUsers.length > 0) {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+    }
+
+    let passwordHash = currentUser.password;
+
+    if (new_password) {
+      if (!current_password) {
+        return res.status(400).json({ message: "Current password is required" });
+      }
+
+      const isMatch = await bcrypt.compare(current_password, currentUser.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Current password is incorrect" });
+      }
+
+      passwordHash = await bcrypt.hash(new_password, 10);
+    }
+
+    await db.execute(
+      "UPDATE users SET full_name = ?, email = ?, password = ? WHERE id = ?",
+      [full_name, email, passwordHash, userId]
+    );
+
+    const updatedUser = {
+      id: currentUser.id,
+      email,
+      full_name,
+      created_at: currentUser.created_at,
+    };
+
+    const token = jwt.sign(
+      {
+        id: updatedUser.id,
+        email: updatedUser.email,
+        full_name: updatedUser.full_name,
+      },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.json({
+      message: "Profile updated successfully",
+      token,
+      user: updatedUser,
+    });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });

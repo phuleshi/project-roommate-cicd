@@ -1,20 +1,22 @@
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function MembersTab() {
-  const [members, setMembers] = useState([
-    { id: 1, name: "Phú", role: "Admin" },
+  const { t } = useLanguage();
+  const [members] = useState([
+    { id: 1, name: "Phu", role: "Admin" },
     { id: 2, name: "Nam", role: "Member" },
-    { id: 3, name: "Hùng", role: "Member" },
+    { id: 3, name: "Hung", role: "Member" },
   ]);
 
   return (
     <div>
-      <h3>Thành viên phòng</h3>
+      <h3>{t("misc.membersTabTitle")}</h3>
 
-      {members.map((m) => (
-        <div key={m.id} className="item-row">
-          <span>{m.name}</span>
-          <span>{m.role}</span>
+      {members.map((member) => (
+        <div key={member.id} className="item-row">
+          <span>{member.name}</span>
+          <span>{member.role === "Admin" ? t("common.admin") : t("common.member")}</span>
         </div>
       ))}
     </div>

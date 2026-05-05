@@ -7,6 +7,11 @@ import express from 'express';
 
 import db, { testDatabaseConnection } from './db.js';
 import authRoutes from './routes/auth.js';
+import roomsRoutes from './routes/rooms.js';
+import expensesRoutes from './routes/expenses.js';
+import invoicesRoutes from './routes/invoices.js';
+import tasksRoutes from './routes/tasks.js';
+import reportsRoutes from './routes/reports.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +31,11 @@ app.use(
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/rooms', roomsRoutes);
+app.use('/api/expenses', expensesRoutes);
+app.use('/api/invoices', invoicesRoutes);
+app.use('/api/tasks', tasksRoutes);
+app.use('/api/reports', reportsRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({

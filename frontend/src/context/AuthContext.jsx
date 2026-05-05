@@ -15,10 +15,15 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  const login = (data) => {
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    setUser(data.user);
+  const syncAuth = (data) => {
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+    }
+
+    if (data.user) {
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
+    }
   };
 
   const logout = () => {
@@ -28,7 +33,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{ user, login: syncAuth, updateAuth: syncAuth, logout, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
