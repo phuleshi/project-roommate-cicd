@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+
+  build:
+    commands:
+      - echo "Install dependencies"
+      - cd frontend
+      - npm install
+
+      - echo "Build React app"
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: frontend/dist
