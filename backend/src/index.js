@@ -45,6 +45,13 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+app.get("/test-cicd", (req, res) => {
+  res.json({
+    message: "🚀 CI/CD backend updated successfully!",
+    time: new Date()
+  });
+});
+
 app.get('/api/test-db', async (_req, res) => {
   try {
     const [rows] = await db.execute('SELECT NOW() AS time');

@@ -510,7 +510,7 @@ const translations = {
       retry: "Thử lại",
     },
     auth: {
-      welcomeBack: "Chào mừng quay lại",
+      welcomeBack: "Chào mừng quay lại - test CI/CD",
       loginSubtitle: "Đăng nhập để tiếp tục quản lý phòng trọ.",
       loginButton: "Đăng nhập",
       noAccount: "Chưa có tài khoản?",
